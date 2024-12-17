@@ -24,6 +24,12 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+app.get('/api/whoami', (req, res) => {
+  const clientIp = req.ip || req.connection.remoteAddress;
+  res.json({ipaddress: '${clientIp}'});
+});
+
+
 
 
 // Listen on port set in environment variable or default to 3000
