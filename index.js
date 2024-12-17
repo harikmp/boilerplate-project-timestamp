@@ -24,9 +24,19 @@ app.get("/", function (req, res) {
 //   res.json({greeting: 'hello API'});
 // });
 
-app.get("/api/whoami", (req, res) => {
-  const clientIp = req.ip || req.connection.remoteAddress;
-  res.json({ipaddress: '${clientIp}'});
+app.set("trust proxy", true);
+app.get("/api/whoami", function (req, res) {
+  //const clientIp = req.ip || req.remoteAddress;
+  //const clientIp = req.headers['x-forwarded-for'] || req.remoteAddress;
+  const clientIp = req.headers["x-forwarded-for"]?.split(',')[0] || req.socket.remoteAddress;
+  const language = req.headers["accept-language"] || "Unknown";
+  const software = req.headers["user-agent"] || "Unknown";
+    res.json({
+        ipaddress: clientIp,
+        language: language,
+        software: software
+    });
+
 });
 
 
