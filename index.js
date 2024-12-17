@@ -15,21 +15,19 @@ app.use(express.static('public'));
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (req, res) {
-  res.sendFile(__dirname + '/views/index.html');
+  res.sendFile(__dirname + '/views/index1.html');
 });
 
 
 // your first API endpoint... 
-app.get("/api/hello", function (req, res) {
-  res.json({greeting: 'hello API'});
-});
+// app.get("/api/hello", function (req, res) {
+//   res.json({greeting: 'hello API'});
+// });
 
-app.get('/api/whoami', (req, res) => {
+app.get("/api/whoami", (req, res) => {
   const clientIp = req.ip || req.connection.remoteAddress;
   res.json({ipaddress: '${clientIp}'});
 });
-
-
 
 
 // Listen on port set in environment variable or default to 3000
